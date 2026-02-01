@@ -1,0 +1,15 @@
+# Core dependencies
+streamlit>=1.29.0
+ultralytics>=8.0.0
+opencv-python>=4.8.0
+Pillow>=10.0.0
+numpy>=1.24.0
+pandas>=2.0.0
+requests>=2.31.0
+
+# Optional (já incluído em ultralytics, mas explícito)
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Para melhor performance (opcional)
+# Se tiveres GPU, instala: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118

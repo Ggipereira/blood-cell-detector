@@ -1,0 +1,54 @@
+# Blood Cells Dataset Configuration
+# Este é um exemplo de ficheiro de configuração para treino YOLO
+
+# Caminho base do dataset
+path: /path/to/your/dataset  # Alterar para o teu caminho
+
+# Caminhos relativos ao 'path' acima
+train: images/train  # Pasta com imagens de treino
+val: images/val      # Pasta com imagens de validação
+test: images/test    # (Opcional) Pasta com imagens de teste
+
+# Classes (ordem importante - deve corresponder às labels)
+names:
+  0: RBC        # Red Blood Cells
+  1: WBC        # White Blood Cells
+  2: Platelets  # Platelets
+
+# Número de classes
+nc: 3
+
+---
+
+# ESTRUTURA DO DATASET ESPERADA:
+
+# dataset/
+# ├── images/
+# │   ├── train/
+# │   │   ├── image1.jpg
+# │   │   ├── image2.jpg
+# │   │   └── ...
+# │   ├── val/
+# │   │   ├── image1.jpg
+# │   │   └── ...
+# │   └── test/ (opcional)
+# │       └── ...
+# │
+# └── labels/
+#     ├── train/
+#     │   ├── image1.txt
+#     │   ├── image2.txt
+#     │   └── ...
+#     ├── val/
+#     │   ├── image1.txt
+#     │   └── ...
+#     └── test/ (opcional)
+#         └── ...
+
+# FORMATO DOS FICHEIROS .TXT (YOLO):
+# Cada linha: <class_id> <x_center> <y_center> <width> <height>
+# Valores normalizados entre 0 e 1
+# Exemplo:
+# 0 0.5 0.5 0.2 0.3
+# 1 0.3 0.4 0.1 0.15
+# 2 0.7 0.6 0.08 0.12
