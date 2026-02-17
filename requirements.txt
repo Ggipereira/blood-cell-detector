@@ -1,0 +1,10 @@
+streamlit
+pillow
+graphviz
+ultralytics
+huggingface_hub
+opencv-python-headless
+Pillow
+numpy
+tensorflow-cpu
+scipy
