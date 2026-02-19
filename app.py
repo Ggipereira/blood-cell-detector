@@ -359,11 +359,15 @@ def load_detection_model(model_name):
 # ==================== EXAMPLE IMAGES ====================
 
 def load_example_images():
-    # TODO: Add your example images to a folder and list them here
     examples = {
-        "Example 1": None,  # "path/to/example1.jpg"
-        "Example 2": None,  # "path/to/example2.jpg"
-        "Example 3": None,  # "path/to/example3.jpg"
+        "Blood Sample 1": "examples/BA_393233.jpg",
+        "Blood Sample 2": "examples/BA_403405.jpg",
+        "Blood Sample 3": "examples/BA_418760.jpg",
+        "Blood Image 1": "examples/BloodImage_00000.jpg",
+        "Blood Image 2": "examples/BloodImage_00001.jpg",
+        "Blood Image 3": "examples/BloodImage_00002.jpg",
+        "Test Sample 1": "examples/test_00552f60c43350a0bf516cfbc13db.jpg",
+        "Test Sample 2": "examples/test_03967e3a34d05f4583e6d361f2c3.jpg",
     }
     return examples
 
@@ -437,9 +441,11 @@ with tab2:
         picture = Image.open(cam).convert("RGB")
 
 with tab3:
-    st.info("🚧 Example images coming soon! Select your examples and they'll appear here.")
     examples = load_example_images()
-    # TODO: Create selection interface for example images when ready
+    selected = st.selectbox("Choose an example", list(examples.keys()))
+    if selected and examples[selected]:
+        picture = Image.open(examples[selected]).convert("RGB")
+        st.image(picture, caption=selected, use_container_width=True)
 
 # ==================== PROCESSING ====================
 
@@ -619,8 +625,15 @@ if st.button("🔬 Run Detection and Classification", type="primary", use_contai
 
         st.balloons()
         st.success("✅ Analysis complete!", icon="🔥")
+        
+        # ==================== FEEDBACK ====================
+        st.markdown("---")
+        st.subheader("⭐ Rate this detection")
+        feedback = st.feedback("stars")
+        if feedback is not None:
+            st.success(f"Thanks for rating {feedback + 1} star{'s' if feedback > 0 else ''}! 🙏")
 
 # ==================== FOOTER ====================
 st.markdown("---")
 st.caption("💡 **Pro Tip**: Upload clear, well-lit blood smear images for best results")
-st.caption("🚀 **Model Evolution**: Compare different YOLO versions to see improvements!")
+st.caption("🚀 **Model Evolution**: Compare between YOLO and U-Net to see different approaches!")
