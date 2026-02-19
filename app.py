@@ -366,8 +366,10 @@ def load_example_images():
         "Blood Sample 4": "examples/BloodImage_00000.jpg",
         "Blood Sample 5": "examples/BloodImage_00001.jpg",
         "Blood Sample 6": "examples/BloodImage_00002.jpg",
-        "Blood Sample 7": "examples/test_00552f60c43350a0bf516cfbc13db.jpg",
-        "Blood Sample 8": "examples/test_03967e3a34d05f4583e6d361f2c3.jpg",
+        "Blood Sample 7": "examples/test_01.png",
+        "Blood Sample 8": "examples/test_02.png",
+        "Blood Sample 9": "examples/test_03.png",
+        "Blood Sample 10": "examples/test_04.png",
     }
     return examples
 
