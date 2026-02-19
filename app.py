@@ -363,11 +363,11 @@ def load_example_images():
         "Blood Sample 1": "examples/BA_393233.jpg",
         "Blood Sample 2": "examples/BA_403405.jpg",
         "Blood Sample 3": "examples/BA_418760.jpg",
-        "Blood Image 1": "examples/BloodImage_00000.jpg",
-        "Blood Image 2": "examples/BloodImage_00001.jpg",
-        "Blood Image 3": "examples/BloodImage_00002.jpg",
-        "Test Sample 1": "examples/test_00552f60c43350a0bf516cfbc13db.jpg",
-        "Test Sample 2": "examples/test_03967e3a34d05f4583e6d361f2c3.jpg",
+        "Blood Sample 4": "examples/BloodImage_00000.jpg",
+        "Blood Sample 5": "examples/BloodImage_00001.jpg",
+        "Blood Sample 6": "examples/BloodImage_00002.jpg",
+        "Blood Sample 7": "examples/test_00552f60c43350a0bf516cfbc13db.jpg",
+        "Blood Sample 8": "examples/test_03967e3a34d05f4583e6d361f2c3.jpg",
     }
     return examples
 
@@ -442,10 +442,31 @@ with tab2:
 
 with tab3:
     examples = load_example_images()
-    selected = st.selectbox("Choose an example", list(examples.keys()))
-    if selected and examples[selected]:
-        picture = Image.open(examples[selected]).convert("RGB")
-        st.image(picture, caption=selected, use_container_width=True)
+    st.write("Click on an image to select it:")
+    
+    # Create a grid of images (4 columns)
+    cols = st.columns(4)
+    
+    for idx, (name, path) in enumerate(examples.items()):
+        col = cols[idx % 4]
+        with col:
+            try:
+                img = Image.open(path)
+                # Use button with image as label
+                if st.button(name, key=f"example_{idx}", use_container_width=True):
+                    picture = img.convert("RGB")
+                    st.session_state['selected_example'] = picture
+                    st.session_state['selected_example_name'] = name
+                st.image(img, use_container_width=True)
+            except:
+                st.error(f"❌ {name} not found")
+    
+    # Display selected image
+    if 'selected_example' in st.session_state:
+        st.markdown("---")
+        st.subheader(f"Selected: {st.session_state['selected_example_name']}")
+        picture = st.session_state['selected_example']
+        st.image(picture, use_container_width=True)
 
 # ==================== PROCESSING ====================
 
