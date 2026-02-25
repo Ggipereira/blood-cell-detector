@@ -1,50 +1,50 @@
 # Blood Cell Detector (Streamlit)
 
-Aplicação web em **Streamlit** para **deteção e contagem de células sanguíneas** em imagens de microscopia (ex.: RBC, WBC e plaquetas), com opção de **classificação de subtipos de WBC** (quando ativada no interface).
+A **Streamlit** web app for **detecting and counting blood cells** in microscopy images (e.g., RBC, WBC and platelets), with an optional **WBC subtype classifier** (when enabled in the UI).
 
-> ⚠️ **Aviso / Isenção de responsabilidade**  
-> Este projeto é **académico/demonstração**. **Não** é um dispositivo médico e **não** deve ser usado para decisões clínicas.
+> ⚠️ **Disclaimer**  
+> This is an **academic/demo** project. It is **not** a medical device and must **not** be used for clinical decision-making.
 
 ---
 
-## Demo (Streamlit Cloud)
-A app está disponível em:  
+## Live demo (Streamlit Cloud)
+The app is available at:  
 https://blood-cell-detector.streamlit.app
 
 ---
 
-## Funcionalidades (alto nível)
-- Upload de imagens (microscopia de sangue periférico)
-- Deteção por *bounding boxes* (pipeline YOLO)
-- Contagem por classe (RBC / WBC / Platelets)
-- Ajuste de **confidence threshold** (e/ou parâmetros no UI, consoante a versão)
-- (Opcional) Classificação de **subtipos de WBC** em recortes (quando ativado)
-- Páginas extra via `pages/` (Streamlit multipage)
+## Key features
+- Upload peripheral blood microscopy images
+- **Bounding-box detection** (YOLO-based pipeline)
+- Class-wise counts (RBC / WBC / Platelets)
+- Adjustable **confidence threshold** (and other UI parameters, depending on the version)
+- (Optional) **WBC subtype classification** on cropped detections
+- Multi-page layout via `pages/` (Streamlit multipage)
 
 ---
 
-## Estrutura do repositório
+## Repository structure
 
 ```
 .
-├─ app.py                # Entry-point da Streamlit app
-├─ pages/                # Páginas adicionais (Streamlit multipage)
-├─ examples/             # Imagens de exemplo / inputs para demo
-├─ images/               # Imagens estáticas (ex.: fotos da equipa, UI assets)
-├─ requirements.txt      # Dependências Python
-├─ packages.txt          # Dependências do sistema (para deploy, ex.: OpenCV)
+├─ app.py                # Streamlit app entry point
+├─ pages/                # Additional pages (Streamlit multipage)
+├─ examples/             # Example images / demo inputs
+├─ images/               # Static assets (e.g., team photos, UI assets)
+├─ requirements.txt      # Python dependencies
+├─ packages.txt          # System dependencies (for deployment, e.g., OpenCV)
 └─ .gitignore
 ```
 
 ---
 
-## Como correr localmente
+## Run locally
 
-### 1) Pré-requisitos
-- Python 3.10+ (recomendado)
+### 1) Requirements
+- Python 3.10+ (recommended)
 - `pip` / `venv`
 
-### 2) Criar ambiente virtual e instalar dependências
+### 2) Create a virtual environment and install dependencies
 ```bash
 python -m venv .venv
 # Windows
@@ -56,62 +56,62 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3) Executar a app
+### 3) Start the app
 ```bash
 streamlit run app.py
 ```
 
-A app deverá abrir no browser (por defeito em `http://localhost:8501`).
+The app should open in your browser (default: `http://localhost:8501`).
 
 ---
 
-## Deploy no Streamlit Community Cloud
-1. Faz push do repositório para o GitHub.
-2. No Streamlit Cloud, escolhe:
-   - **Repository**: o teu repo
-   - **Branch**: `main` (ou outro)
+## Deploy to Streamlit Community Cloud
+1. Push the repository to GitHub.
+2. In Streamlit Cloud, select:
+   - **Repository**: your repo
+   - **Branch**: `main` (or another)
    - **Main file path**: `app.py`
 
-### Nota sobre `packages.txt`
-Se estiveres a usar OpenCV (ou libs que dependem de pacotes do sistema), o Streamlit Cloud pode precisar do `packages.txt`.  
-Mantém esse ficheiro na root do repo e inclui lá as dependências do sistema necessárias (ex.: libs para `opencv-python`).
+### Note on `packages.txt`
+If you use OpenCV (or other libraries requiring system packages), Streamlit Cloud may need `packages.txt`.  
+Keep it in the repo root and list the required system dependencies there (e.g., libraries needed by `opencv-python`).
 
 ---
 
-## Utilização (na app)
-1. Faz upload de uma imagem de microscopia.
-2. Seleciona o modelo (se houver lista de modelos no UI).
-3. Ajusta o **confidence threshold** conforme necessário:
-   - **mais alto** → menos deteções (menos falsos positivos)
-   - **mais baixo** → mais deteções (mais sensível, mas pode aumentar falsos positivos)
-4. Visualiza caixas + contagem por classe.
-5. (Opcional) ativa classificação de WBC (se disponível) para obter subtipos.
+## How to use (in the app)
+1. Upload a microscopy image.
+2. Select the model (if your UI provides a model selector).
+3. Adjust the **confidence threshold** as needed:
+   - **higher** → fewer detections (fewer false positives)
+   - **lower** → more detections (more sensitive, may increase false positives)
+4. View detections + class-wise counts.
+5. (Optional) enable WBC classification (if available) to get subtypes.
 
 ---
 
 ## Troubleshooting
 
-### Erros com OpenCV no deploy
-- Confirma que `requirements.txt` inclui a dependência correta (ex.: `opencv-python` ou `opencv-python-headless`).
-- Se o ambiente precisar de libs do sistema, adiciona-as ao `packages.txt`.
+### OpenCV errors on deployment
+- Make sure `requirements.txt` includes the correct package (e.g., `opencv-python` or `opencv-python-headless`).
+- If system libraries are required, add them to `packages.txt`.
 
 ### “Module not found”
-- Garante que instalaste o `requirements.txt` no ambiente virtual ativo.
-- Se adicionaste novas dependências, atualiza `requirements.txt`.
+- Ensure you installed `requirements.txt` in the active environment.
+- If you added new dependencies, update `requirements.txt`.
 
 ---
 
-## Contribuidores
+## Contributors
 - Diogo Casquinha  
 - Vicente Soares  
 - Guilherme Pereira  
 - Gabriel Afonso  
 
 Supervisor: Simão Gonçalves  
-Instituição: NOVA Executive Education & Samsung
+Institution: NOVA Executive Education & Samsung
 
 ---
 
-## Licença
-Define a licença conforme a entrega do projeto (ex.: MIT, Apache-2.0, ou “All rights reserved”).  
-Se ainda não tens, podes criar um ficheiro `LICENSE` e escolher uma licença apropriada.
+## License
+Add a license depending on your project requirements (e.g., MIT, Apache-2.0, or “All rights reserved”).  
+If you don’t have one yet, create a `LICENSE` file and choose an appropriate license.
